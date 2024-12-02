@@ -21,10 +21,13 @@
     "gulp-concat": "^2.6.1",
     "gulp-imagemin": "^9.0.0",
     "gulp-sass": "^5.1.0",
+    "gulp-scale-images": "^3.0.3",
     "gulp-sourcemaps": "^3.0.0",
     "gulp-terser": "^2.1.0",
     "gulp4-run-sequence": "^1.0.2",
     "sass": "^1.71.0",
-    "terser": "^5.27.1"
+    "sharp": "^0.33.5",
+    "terser": "^5.27.1",
+    "through2": "^4.0.2"
   }
 }

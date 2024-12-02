@@ -14,6 +14,8 @@ import imagemin from 'gulp-imagemin';
 import sourcemaps from 'gulp-sourcemaps';
 import cleanCSS from 'gulp-clean-css';
 import autoprefixer from 'gulp-autoprefixer';
+import scaleImages from 'gulp-scale-images';
+import through2 from 'through2';
 
 const srcDir = './assets'; // Source directory
 const destDir = './dist'; // Destination directory
@@ -102,12 +104,22 @@ gulp.task("terser", function() {
     .pipe(gulp.dest(destDir + '/js'));
 });
 
+const thumbnail = (file, _, cb) => {
+    console.log(file, cb)
+    file.scale = {maxWidth: 1200}
+    cb(null, file)
+}
+
 // Compress images
 gulp.task('images', function() {
     return gulp.src(srcDir + '/images/**/*')
+    // .pipe(cache(imagemin()))
+    .pipe(through2.obj(thumbnail))
+    .pipe(cache(scaleImages()))
     .pipe(cache(imagemin()))
     .pipe(gulp.dest(destDir + '/images'));
 });
+// npm install gulp-newer --save-dev
 
 // Minify CSS
 gulp.task('minify-css',function() {
